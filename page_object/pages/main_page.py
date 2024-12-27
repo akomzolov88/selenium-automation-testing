@@ -1,4 +1,4 @@
-from .base_page import BasePageTest
+from base_page import BasePageTest
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
