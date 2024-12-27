@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'page_object')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:\Projects\selenium-automation-testing\page_object')))
 
 from page_object.pages.main_page import MainPageTest
 
