@@ -63,18 +63,6 @@ class ProductPageTest(BasePageTest):
         "Цена добавленного товара и товара не совпадают"
        
     def solve_quiz_and_get_code(self):
-        import math
-        def calc(x):
-            return str(math.log(abs(12*math.sin(int(x)))))
-        x_element = self.browser.find_element(*ProductPageLocators.X)
-        x = x_element.text
-        y = calc(x)
-        input_field = self.browser.find_element(*ProductPageLocators.INPUT_FIELD)
-        input_field.send_keys(y)
-        submit_button = self.browser.find_element(*ProductPageLocators.SUBMIT_BUTTON)
-        submit_button.click()
-
-    def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))
