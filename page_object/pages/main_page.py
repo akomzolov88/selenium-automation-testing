@@ -3,6 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:/Projects/selenium-automation-testing/page_object')))
 
 from pages.base_page import BasePageTest
+from pages.locators import MainPageLocators
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
@@ -13,12 +14,12 @@ class MainPageTest(BasePageTest):
         self.browser.implicitly_wait(timeout)
 
     def go_to_login_page(self):
-        login_link = self.browser.find_element(By.CSS_SELECTOR, "a#login_link")
+        login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
         login_link.click()
     
     def should_be_login_link(self):
         # Реализация метода проверки наличия ссылки на логин
-        assert self.is_element_present(By.CSS_SELECTOR, "a#login_link_invalid"), "Login link is not presented"
+        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
 
     def is_element_present(self, how, what):
         try:
