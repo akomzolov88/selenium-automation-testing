@@ -6,7 +6,7 @@ from page_object.pages.base_page import BasePageTest
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-class MainPageTest(BasePageTest): 
+class MainPageTest(BasePageTest):
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
