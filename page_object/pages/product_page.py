@@ -7,7 +7,7 @@ from pages.base_page import BasePageTest
 from pages.locators import ProductPageLocators
 from pages.login_page import LoginPage
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoAlertPresentException
 
 class ProductPageTest(BasePageTest):
     def add_product_to_basket(self):
