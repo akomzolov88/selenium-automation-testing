@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'page_object')))
+
 from base_page import BasePageTest
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
