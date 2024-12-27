@@ -1,6 +1,6 @@
 from .base_page import BasePageTest
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.exceptions import NoSuchElementException
 
 class MainPageTest(BasePageTest): 
     def __init__(self, browser, url, timeout=10):
