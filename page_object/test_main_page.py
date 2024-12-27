@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:\Projects\selenium-automation-testing\page_object')))
 
-from page_object.pages.main_page import MainPageTest
+from pages.main_page import MainPageTest
 
 def test_guest_can_go_to_login_page(browser):
     link = "http://selenium1py.pythonanywhere.com/"
