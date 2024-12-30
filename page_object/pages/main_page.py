@@ -1,33 +1,20 @@
+# 4.3.15 Финальное задание  в блоке: Применение патерна Page Object.
+# Ссылка на задание: https://stepik.org/lesson/201964/step/15?unit=176022
+# Ссылка на правила подготовки кода к ревью: https://stepik.org/lesson/201964/step/14?unit=176022 
+
+# Импортируем модуль sys для работы с системными параметрами
 import sys
+# Импортируем модуль os для работы с функциями операционной системы
 import os
+# Добавляем в переменную sys.path абсолютный путь к директории page_object
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:/Projects/selenium-automation-testing/page_object')))
 
-from pages.base_page import BasePageTest
-from pages.locators import MainPageLocators
-from pages.login_page import LoginPage
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+# Импортируем класс BasePage из файла base_page.py
+from base_page import BasePage
 
-class MainPageTest(BasePageTest):
+class MainPage(BasePage):
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
-
-    def go_to_login_page(self):
-        login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
-        login_link.click()
-        return LoginPage(browser=self.browser, url=self.browser.current_url) 
     
-    def should_be_login_link(self):
-        # Реализация метода проверки наличия ссылки на логин
-        assert self.is_element_present(*MainPageLocators.LOGIN_LINK), \
-        "Login link is not presented"
-
-    def is_element_present(self, how, what):
-        try:
-            self.browser.find_element(how, what)
-        except NoSuchElementException:
-            return False
-        return True
-        
