@@ -30,7 +30,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:/Projects/selenium-automation-testing/page_object')))
 
 # Импортируем класс BasePageLocators из файла Locators.py
-from locators import BasePageLocators
+from pages.locators import BasePageLocators
 # Импортируем класс WebDriverWait из модуля selenium.webdriver.support.ui
 # Класс WebDriverWait используется для ожидания повяления элементов на странице
 from selenium.webdriver.support.ui import WebDriverWait

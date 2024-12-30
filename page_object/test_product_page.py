@@ -65,16 +65,16 @@ class TestContentIndependenceLookingBug():
     # Испрользуя параметризацию, создаём список ссылок для поиска бага на страницах
     @pytest.mark.parametrize("link", 
         [
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
-        pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail),
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
+            pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail),
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
         ])
     def test_guest_can_add_product_to_basket(browser, link):
         # Создаём переменную page и присваиваем ей объект класса ProductPage
@@ -167,7 +167,7 @@ class TestInheritanceExample():
         # Создаём переменную link и присваиваем ей ссылку на главную страницу магазина
         link = 'http://selenium1py.pythonanywhere.com'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = ProductPage(browser, link)
+        page = Item(browser, link)
         # Открываем страницу
         page.open()
         # Переходим на страницу Авторизации
@@ -254,16 +254,16 @@ class TestPrepareCodeToReview():
     # Испрользуя параметризацию, создаём список ссылок для поиска бага на страницах
     @pytest.mark.parametrize("link", 
         [
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
-        pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail),
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
-        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
+            pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7", marks=pytest.mark.xfail),
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
+            "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
         ])
     def test_guest_can_add_product_to_basket(browser, link):
         # Создаём переменную page и присваиваем ей объект класса ProductPage

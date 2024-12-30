@@ -10,7 +10,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:/Projects/selenium-automation-testing/page_object')))
 
 # Импортируем класс BasePage из файла base_page.py
-from base_page import BasePage
+from pages.base_page import BasePage
 
 class MainPage(BasePage):
     def __init__(self, browser, url, timeout=10):
