@@ -9,12 +9,12 @@ import os
 # Добавляем в переменную sys.path абсолютный путь к директории page_object
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:/Projects/selenium-automation-testing/page_object')))
 
-# Импортируем класс Item из файла base_page.py
-from pages.product_page import Item
-# Импортируем класс Login из файла login_page.py
-from pages.login_page import Login
-# Импортируем класс Cart из файла basket_page.py
-from pages.basket_page import Cart
+# Импортируем класс ItemPage из файла base_page.py
+from pages.product_page import ItemPage
+# Импортируем класс LoginPage из файла login_page.py
+from pages.login_page import LoginPage
+# Импортируем класс CartPage из файла basket_page.py
+from pages.basket_page import CartPage
 # Импортируем модуль time для работы со временем при помощи функции time()
 import time
 # Импортируем модуль pytest запуска тестов, их параметризации и маркировки
@@ -27,7 +27,7 @@ class TestAddToBasket():
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Добавляем товар в корзину
@@ -36,17 +36,19 @@ class TestAddToBasket():
         page.solve_quiz_and_get_code()
 
 # 4.3.3 Задание: независимость от данных
-class TestDataIndependence():    
-    # Создаём тестовый метод test_user_can_add_product_to_basket для сравнения названия и цены товара с названием и ценой в корзине и в уведомлении
-    def test_user_can_add_product_to_basket(self, browser):
+class TestDataIndependence():   
+    # Создаём тестовый метод test_guest_can_add_product_to_basket для сравнения названия и цены товара с названием и ценой в корзине и в уведомлении
+    def test_guest_can_add_product_to_basket(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Добавляем товар в корзину
         page.add_product_to_basket()
+        # Получаем ответ на задачу и вводим его в поле для ответа
+        page.solve_quiz_and_get_code()
         # Проверяем наличие названия товара на странице товара
         page.should_be_product_name()
         # Проверяем наличие цены товара на странице товара
@@ -76,9 +78,10 @@ class TestContentIndependenceLookingBug():
             "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
             "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
         ])
-    def test_guest_can_add_product_to_basket(browser, link):
+    # Создаём тестовый метод test_guest_can_add_product_to_basket для добавления товара в корзину и поиска бага по ссылкам из параметризации
+    def test_guest_can_add_product_to_basket(self, browser, link):
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         page.open()
         # Добавляем товар в корзину
         page.add_product_to_basket()
@@ -98,38 +101,39 @@ class TestContentIndependenceLookingBug():
         page.is_success_price_correct()
 
 # 4.3.6 Задание: отрицательные проверки
-class TestNegativeChecks():   
+class TestNegativeChecks():
     @pytest.mark.xfail()
-    def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    # Создаём тестовый метод test_guest_cant_see_success_message_after_adding_product_to_basket для проверки что элемент с локатором alert-success не отображается
+    def test_guest_cant_see_success_message_after_adding_product_to_basket(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Добавляем товар в корзину
         page.add_product_to_basket()
         # Проверяем что элемент с локатором alert-success не отображается
         page.should_not_be_success_product_name()
-    
-    # 4.3.6 Задание: отрицательные проверки
-    def test_guest_cant_see_success_message(browser):
+
+    # Создаём тестовый метод test_guest_cant_see_success_message для проверки что элемент с локатором alert-success не отображается 
+    def test_guest_cant_see_success_message(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Проверяем что элемент с локатором alert-success не отображается
         page.should_not_be_success_product_name()
 
-    # 4.3.6 Задание: отрицательные проверки 
     @pytest.mark.xfail()
-    def test_message_disappeared_after_adding_product_to_basket(browser):
+    # Создаём тестовый метод test_message_disappeared_after_adding_product_to_basket для проверки исчезновения элемента с локатором alert-success
+    def test_message_disappeared_after_adding_product_to_basket(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Добавляем товар в корзину
@@ -139,57 +143,64 @@ class TestNegativeChecks():
 
 # 4.3.8 Плюсы наследования: пример
 class TestInheritanceExample():
-    def test_guest_can_go_to_login_page(browser):
+    @pytest.mark.login_guest
+    # Создаём тестовый метод test_guest_can_go_to_login_page для проверки что гость может перейти на страницу авторизации
+    def test_guest_can_go_to_login_page(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на главную страницу магазина
         link = 'http://selenium1py.pythonanywhere.com'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Переходим на страницу Авторизации
         page.go_to_login_page()
         # Создаём переменную login_page и присваиваем ей объект класса LoginPage
-        login = Login(browser, browser.current_url)
+        login = LoginPage(browser, browser.current_url)
         # Проверяем что открылась страница авторизации
         login.should_be_login_page()
 
-    def test_guest_should_see_login_link_on_product_page(browser):
+    @pytest.mark.login_guest
+    # Создаём тестовый метод test_guest_should_see_login_link_on_product_page для проверки наличия ссылки на страницу авторизации
+    def test_guest_should_see_login_link_on_product_page(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Проверяем наличие ссылки на страницу авторизации
         page.should_be_login_link()
 
-    def test_guest_can_go_to_login_page_from_product_page(browser):
+    @pytest.mark.login_guest
+    # Создаём тестовый метод test_guest_can_go_to_login_page_from_product_page для проверки что гость может перейти на страницу авторизации
+    def test_guest_can_go_to_login_page_from_product_page(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на главную страницу магазина
         link = 'http://selenium1py.pythonanywhere.com'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Переходим на страницу Авторизации
         page.go_to_login_page()
         # Создаём переменную login_page и присваиваем ей объект класса LoginPage
-        login = Login(browser, browser.current_url)
+        login = LoginPage(browser, browser.current_url)
         # Проверяем что открылась страница авторизации
         login.should_be_login_page()
 
 # 4.3.10 Задание: наследование и отрицательные проверки
 class TestInheritanceAndNegativeChecks():
-    def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    # Создаём тестовый метод test_guest_cant_see_product_in_basket_opened_from_main_page для проверки что у гостя пустая корзина
+    def test_guest_cant_see_product_in_basket_opened_from_main_page(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на главную страницу магазина
         link = 'http://selenium1py.pythonanywhere.com'
         # Создаём переменную page и присваиваем ей объект класса MainPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Переходим в корзину
-        page.go_to_basket_page()
+        page.go_to_cart_page()
         # Создаём переменную basket_page и присваиваем ей объект класса BasketPage
-        cart = Cart(browser, browser.current_url)
+        cart = CartPage(browser, browser.current_url)
         # Проверяем что корзина пуста
         cart.should_not_be_basket_summary()
         # Проверяем что есть сообщение о том что корзина пуста
@@ -197,12 +208,14 @@ class TestInheritanceAndNegativeChecks():
 
 # 4.3.13 Задание: группировка тестов и setup
 class TestSetupGrouping():
+    # Создаём фикстуру setup для регистрации нового пользователя
+    @pytest.mark.login_guest
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на главную страницу магазина
         link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
         # Создаём переменную page и присваиваем ей объект класса LoginPage
-        page = Login(browser, link)
+        page = LoginPage(browser, link)
         # Открываем страницу
         page.open()
         # Создаём переменную email и присваиваем ей значение времени в секундах + почта
@@ -214,11 +227,13 @@ class TestSetupGrouping():
         ## Проверяем что пользователь авторизован
         page.should_be_authorized_user()
 
+    @pytest.mark.login_guest
+    # Создаём тестовый метод test_user_cant_see_success_message для проверки что элемент с локатором alert-success не отображается
     def test_user_cant_see_success_message(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Проверяем что элемент с локатором alert-success не отображается
@@ -232,11 +247,13 @@ class TestPrepareCodeToReview():
         # Создаём переменную link и присваиваем ей ссылку на страницу товара
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Добавляем товар в корзину
         page.add_product_to_basket()
+        # Проверяем наличие названия товара на странице товара
+        page.solve_quiz_and_get_code()
         # Проверяем наличие названия товара на странице товара
         page.should_be_product_name()
         # Проверяем наличие цены товара на странице товара
@@ -265,9 +282,10 @@ class TestPrepareCodeToReview():
             "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
             "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
         ])
-    def test_guest_can_add_product_to_basket(browser, link):
+    # Создаём тестовый метод test_guest_can_add_product_to_basket для добавления товара в корзину и поиска бага по ссылкам из параметризации
+    def test_guest_can_add_product_to_basket(self, browser, link):
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         page.open()
         # Добавляем товар в корзину
         page.add_product_to_basket()
@@ -285,14 +303,14 @@ class TestPrepareCodeToReview():
         page.is_success_name_correct()
         # Проверяем что цена товара в уведомлении совпадает с ценой товара на странице товара
         page.is_success_price_correct()
-
+    
     @pytest.mark.need_review
     @pytest.mark.xfail()
-    def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на главную страницу магазина
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Переходим в корзину
@@ -301,16 +319,16 @@ class TestPrepareCodeToReview():
         page.should_not_be_success_product_name()
 
     @pytest.mark.need_review
-    def test_guest_can_go_to_login_page_from_product_page(browser):
+    def test_guest_can_go_to_login_page_from_product_page(self, browser):
         # Создаём переменную link и присваиваем ей ссылку на главную страницу магазина
         link = 'http://selenium1py.pythonanywhere.com'
         # Создаём переменную page и присваиваем ей объект класса ProductPage
-        page = Item(browser, link)
+        page = ItemPage(browser, link)
         # Открываем страницу
         page.open()
         # Переходим на страницу Авторизации
         page.go_to_login_page()
         # Создаём переменную login_page и присваиваем ей объект класса LoginPage
-        login = Login(browser, browser.current_url)
+        login = LoginPage(browser, browser.current_url)
         # Проверяем что открылась страница авторизации
         login.should_be_login_page()

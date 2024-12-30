@@ -48,6 +48,15 @@ import math
 
 # Создаём класс BasePage для работы с методами, которые будут использоваться в других классах при помощи наследования (импорта)
 class BasePage():
+    # Создаём конструктор класса BasePage
+    def __init__(self, browser, url, timeout=10):
+        # Инициализируем атрибуты класса BasePage
+        self.browser = browser
+        # Присваиваем атрибуту url переданное значение
+        self.url = url
+        # Устанавливаем неявное ожидание для поиска элементов на странице
+        self.browser.implicitly_wait(timeout)
+
     '''
     Страница Авторизации пользователя
     '''
@@ -71,7 +80,7 @@ class BasePage():
     Страница Корзины товаров
     '''
 
-    # Создаём метод go_to_basket_page для прехода на страницу корзины
+    # Создаём метод go_to_cart_page для прехода на страницу корзины
     def go_to_cart_page(self):
         button = self.browser.find_element(*BasePageLocators.CART_BUTTON)
         button.click()

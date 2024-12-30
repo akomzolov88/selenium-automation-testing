@@ -14,8 +14,8 @@ from pages.base_page import BasePage
 # Импортируем класс CartPageLocators из файла locators.py для использования локаторов
 from pages.locators import CartPageLocators
 
-# Создаём класс BasketPage, который наследует класс BasePage
-class Cart(BasePage):
+# Создаём класс CartPage, который наследует класс BasePage
+class CartPage(BasePage):
     # Создаём метод should_not_be_basket_summary для проверки что корзина пустая
     def should_not_be_basket_summary(self):
         # Проверяем, что элемент с локатором BASKET_SUMMARY не присутсвует на странице

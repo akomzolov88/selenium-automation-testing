@@ -13,8 +13,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'D:/Proj
 from pages.base_page import BasePage
 
 class MainPage(BasePage):
+    # Создаём конструктор класса BasePage
     def __init__(self, browser, url, timeout=10):
+        # Инициализируем атрибуты класса BasePage
         self.browser = browser
+        # Присваиваем атрибуту url переданное значение
         self.url = url
+        # Устанавливаем неявное ожидание для поиска элементов на странице
         self.browser.implicitly_wait(timeout)
     

@@ -14,8 +14,8 @@ from pages.base_page import BasePage
 # Импортируем класс ProductPageLocators из файла locators.py для использования локаторов страницы товара
 from pages.locators import ItemPageLocators
 
-# Создаём класс ProductPage, который наследует класс BasePage
-class Item(BasePage):
+# Создаём класс ItemPage, который наследует класс BasePage
+class ItemPage(BasePage):
     # Создаём метод add_product_to_basket для добавления товара в корзину
     def add_product_to_basket(self):
         # Создаём переменную add_button и присваиваем ей элемент кнопки добавления товара в корзину указывая локатор кнопки

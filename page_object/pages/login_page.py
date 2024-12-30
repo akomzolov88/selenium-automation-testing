@@ -15,7 +15,7 @@ from pages.base_page import BasePage
 from pages.locators import LoginPageLocators
 
 # Создаём класс LoginPage, который наследует класс BasePage
-class Login(BasePage):
+class LoginPage(BasePage):
     # Создаём метод should_be_login_page для проверки что на странице присутстует форма для входа пользователя и форма для регистрации нового пользователя
     def should_be_login_page(self):
         self.should_be_login_url()
